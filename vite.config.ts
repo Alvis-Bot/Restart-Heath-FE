@@ -12,7 +12,7 @@ export default defineConfig({
     svg(),
   ],
   server: {
-    port: 3000
+    port: 4444,
   },
   css: {
     devSourcemap: true
