@@ -31,7 +31,7 @@ export interface IInfoForm {
 
 export default function InfoForm() {
   // const dispatch = useAppDispatch();
-  const [socketUrl, setSocketUrl] = useState('ws://localhost:3005');
+  const [socketUrl, setSocketUrl] = useState('ws://103.186.65.172:3005');
   const [messageHistory, setMessageHistory] = useState([]);
   const { sendMessage , sendJsonMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
