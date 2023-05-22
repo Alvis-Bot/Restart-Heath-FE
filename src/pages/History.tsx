@@ -60,7 +60,7 @@ const History = () => {
   const [data, setData] = useState<IData[]>([]);
 
   useEffect(() => {
-    axios.get<IData[]>('http://localhost:3005/history' ,{
+    axios.get<IData[]>('http://103.186.65.172/:3005/history' ,{
       params: {
         mssv : '120000903'
       }
