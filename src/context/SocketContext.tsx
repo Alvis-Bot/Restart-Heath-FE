@@ -1,6 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
 
-const ws = new WebSocket("ws://localhost:3005");
+const ws = new WebSocket("ws://103.186.65.172:3005");
 
 export const SocketContext = createContext(ws);
 
