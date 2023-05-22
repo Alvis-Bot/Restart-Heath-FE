@@ -1,6 +1,6 @@
 import { Box, Stack, styled, Typography } from '@mui/material'
-import male from '~/assets/Group.png'
-import feMale from '~/assets/businessman_man_business 1.png'
+import male from '@/assets/Group.png'
+import feMale from '@/assets/businessman_man_business 1.png'
 import React, { FC } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 
@@ -41,6 +41,7 @@ const GenderOption: FC<GenderInputProps> = ({ onClick, check, gender }) => {
       <GenderItem
         onClick={onClick}
         sx={{
+          borderRadius: '20px',
           transition: 'all 0.3s ease',
           backgroundColor: check ? '#F0F2F4' : '#ffff',
           border: check ? 'none' : '2px solid #eeeeee'

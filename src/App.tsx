@@ -1,13 +1,17 @@
-import { ThemeProvider } from '~/theme'
-
 import React from 'react'
-import Router from '~/router'
+import {ThemeProvider} from "@/theme";
+import Router from "@/router";
+import {SocketProvider} from "@/context/SocketContext";
+
+
 
 function App() {
   return (
+    <SocketProvider>
     <ThemeProvider>
       <Router />
     </ThemeProvider>
+    </SocketProvider>
   )
 }
 

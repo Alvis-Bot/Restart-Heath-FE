@@ -1,9 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom'
 import Index from '../layout/dashboard'
 
-import { DEFAULT_PATH } from '~/config'
-import {Component, lazy, Suspense} from 'react'
-import LoadingScreen from '~/components/LoadingScreen'
+
+import { Component, lazy, Suspense } from 'react'
+import LoadingScreen from "@/components/LoadingScreen";
+import {DEFAULT_PATH} from "@/config";
 
 const Loadable = (Component: any) => (props: any) => {
   return (
@@ -20,9 +21,9 @@ export default function Router() {
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
         { path: 'app', element: <GeneralApp /> },
-        { path: "welcome", element: <Welcome /> },
-        { path: "personal", element: <Personal /> },
-        // { path: "conversation", element: <Conversation /> },
+        { path: 'welcome', element: <Welcome /> },
+        { path: 'personal', element: <Personal /> },
+        { path: "history", element: <History /> },
         // { path: "chats", element: <Chats /> },
         // { path: "contact", element: <Contact /> },
         // { path: "profile", element: <Profile /> },
@@ -40,3 +41,4 @@ export default function Router() {
 const GeneralApp = Loadable(lazy(() => import('../pages/GeneralApp')))
 const Welcome = Loadable(lazy(() => import('../pages/WelCome')))
 const Personal = Loadable(lazy(() => import('../pages/Personal')))
+const History = Loadable(lazy(() => import('../pages/History')))

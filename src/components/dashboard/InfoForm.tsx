@@ -1,94 +1,94 @@
-import React, {useCallback, useEffect, useState} from "react";
-import * as Yup from "yup";
-import {Link as RouterLink} from "react-router-dom";
+import React, { useCallback, useEffect, useState } from 'react'
+import * as Yup from 'yup'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 // form
-import {SubmitHandler, useForm, UseFormReturn} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm, UseFormReturn } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 // @mui
-import {FormControlLabel, Radio, IconButton, InputAdornment, Link, RadioGroup, Stack, styled} from "@mui/material";
-import {LoadingButton} from "@mui/lab";
+import {
+  FormControlLabel,
+  Radio,
+  IconButton,
+  InputAdornment,
+  Link,
+  RadioGroup,
+  Stack,
+  styled,
+  TextField,
+  TextFieldProps,
+  OutlinedInputProps
+} from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 // components
 // import FormProvider, { RHFTextField } from "../../components/hook-form";
-import {ArrowRight, Eye, EyeSlash} from "phosphor-react";
+import { ArrowRight, Eye, EyeSlash } from 'phosphor-react'
 // import { LoginUser } from "../../redux/slices/auth";
-import FormProvider, {RHFTextField} from "../../components/hook-form";
-import {CheckCircleIcon} from "@heroicons/react/24/solid";
-import ButtonNext from "~/components/ButtonNext";
-import RHFTGroupRadio from "~/components/hook-form/RHFTGroupRadio";
-import {GenderEnum} from "~/components/custom/GenderOption";
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+
+import { CheckCircleIcon } from '@heroicons/react/24/solid'
+
+
+import { alpha } from '@mui/material/styles'
+import {GenderEnum} from "@/components/custom/GenderOption";
+import FormProvider, {RHFTextField} from "@/components/hook-form";
+import RHFTGroupRadio from "@/components/hook-form/RHFTGroupRadio";
+import ButtonNext from "@/components/ButtonNext";
+import {useSocket} from "@/hooks/useSocket";
 
 // ----------------------------------------------------------------------
 
 export interface IInfoForm {
-  mssv: string;
-  fullName: string;
-  class: string;
-  gender: string;
+  mssv: string
+  fullName: string
+  class: string
+  gender: string
 }
-
-
 
 export default function InfoForm() {
   // const dispatch = useAppDispatch();
-  const [socketUrl, setSocketUrl] = useState('ws://103.186.65.172:3005');
-  const [messageHistory, setMessageHistory] = useState([]);
-  const { sendMessage , sendJsonMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const socket = useSocket()
 
 
 
 
+  const navigate = useNavigate()
 
   const InfoSchema = Yup.object().shape({
-    mssv: Yup.string().required("MSSV không được để trống"),
-    fullName: Yup.string().required("Họ và tên không được để trống"),
-    class: Yup.string().required("Lớp không được để trống"),
-
-  });
-
-
-
+    mssv: Yup.string().required('MSSV không được để trống'),
+    fullName: Yup.string().required('Họ và tên không được để trống'),
+    class: Yup.string().required('Lớp không được để trống')
+  })
 
   const defaultValues = {
-    mssv: "",
-    fullName: "",
-    class: "",
-    gender : GenderEnum.MALE
+    mssv: '',
+    fullName: '',
+    class: '',
+    gender: GenderEnum.MALE
   }
-
 
   const methods: UseFormReturn<IInfoForm> = useForm<IInfoForm>({
     defaultValues,
-    resolver: yupResolver(InfoSchema),
-  });
+    resolver: yupResolver(InfoSchema)
+  })
 
   const {
     handleSubmit,
     setValue,
-    formState: {errors},
-  } = methods;
+    formState: { errors }
+  } = methods
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("gender" , event.target.value)
-  };
-  const onSubmit: SubmitHandler<IInfoForm> = data => {
-    console.log(data);
-    sendJsonMessage({
-      event : "info",
-      data : {
+    setValue('gender', event.target.value)
+  }
+  const onSubmit: SubmitHandler<IInfoForm> = async (data) => {
+    console.log(data)
+    socket.send(JSON.stringify({
+      event: 'info',
+      data: {
         ...data
       }
-    })
-    // dispatch(loginUser(data))
+    }))
+    navigate('/personal')
   }
-
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  }[readyState];
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
@@ -97,16 +97,19 @@ export default function InfoForm() {
         {/*    <Alert severity="error">{errors.email.message}</Alert>*/}
         {/*)}*/}
 
-       <RHFTGroupRadio name={`gender`} onChange={handleChange}  />
-        <RHFTextField sx={{
-          backgroundColor : "#fff",
-          borderRadius : "8px"
-        }} name="mssv" label="MSSV" type={`text`}/>
-        <RHFTextField name="fullName" label="Họ và tên" type={`text`}/>
-      <RHFTextField name="class" label="Lớp" type={`text`}/>
+        <RHFTGroupRadio name={`gender`} onChange={handleChange} />
+        <RHFTextField label='MSSV' name={`mssv`}  style={{ marginTop: 11 }} />
+        <RHFTextField label='Họ và tên' name={`fullName`} style={{ marginTop: 11 }} />
+        <RHFTextField label='Lớp' name={`class`}  style={{ marginTop: 11 }} />
       </Stack>
 
-      <ButtonNext onClick={() => {}} loading={false} disabled={readyState !== ReadyState.OPEN} />
+      <ButtonNext
+        onClick={() => {}}
+        loading={false}
+        disabled={
+         socket.readyState !== socket.OPEN
+        }
+      />
     </FormProvider>
-  );
+  )
 }
