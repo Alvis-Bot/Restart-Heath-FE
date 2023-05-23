@@ -87,6 +87,7 @@ export default function InfoForm() {
         ...data
       }
     }))
+    await localStorage.setItem('mssv', data.mssv);
     navigate('/personal')
   }
 

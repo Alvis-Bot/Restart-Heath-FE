@@ -48,6 +48,7 @@ export const Personal = () => {
 
   const navigate = useNavigate()
   const [value, setValue] = React.useState(0)
+  const mssv = localStorage.getItem('mssv')
 
   return (
     <>
@@ -251,7 +252,7 @@ export const Personal = () => {
             label='Chi tiết' icon={<Heartbeat size={32} weight="bold" />} />
           <BottomNavigationAction
             onClick={() => {
-              navigate('/history')
+              navigate(`/history/${mssv}`)
             }}
             label='Lịch sử' icon={<ClockCounterClockwise size={32} weight="bold" />} />
         </BottomNavigation>

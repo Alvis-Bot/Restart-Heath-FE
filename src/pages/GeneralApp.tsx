@@ -51,7 +51,9 @@ const GeneralApp = () => {
   }
   return (
     <Stack p={4} maxWidth='600px' width={`100%`} height={`100%`} spacing={3}>
-      <Typography variant={`h2`}>Thông tin cơ bản của bạn</Typography>
+      <Typography variant={`h2`} sx={{
+        textAlign: 'center'
+      }}>Thông tin cơ bản của bạn</Typography>
       <InfoForm />
     </Stack>
   )

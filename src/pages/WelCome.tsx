@@ -32,7 +32,7 @@ export const Welcome = () => {
     <>
       <Stack width={`100%`} direction={`column`} spacing={5} m={5}>
         <img src={logo} alt='' width={`100%`} />
-        <Typography variant={`h2`}>Welcome to your personal health tracker</Typography>
+        <Typography variant={`h2`}>Height Weight Tracker</Typography>
         <ButtonNext onClick={() => navigate('/app')} loading={false} disabled={false} />
       </Stack>
     </>

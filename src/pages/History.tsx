@@ -35,6 +35,7 @@ import useResponsive from "@/hooks/useResponsive";
 import {StarIcon} from "@heroicons/react/20/solid";
 import axios from "axios";
 import {GenderEnum} from "@/components/custom/GenderOption";
+import {useParams} from "react-router-dom";
 
 
 interface IData {
@@ -57,12 +58,13 @@ const formatTime = (time: string) => {
 const History = () => {
   const isDesktop = useResponsive('up', 'sm')
 
+  const { id } = useParams()
   const [data, setData] = useState<IData[]>([]);
 
   useEffect(() => {
     axios.get<IData[]>('http://103.186.65.172:3005/history' ,{
       params: {
-        mssv : '120000903'
+        mssv : id
       }
     })
       .then(response => {

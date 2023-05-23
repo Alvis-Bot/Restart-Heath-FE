@@ -23,7 +23,7 @@ export default function Router() {
         { path: 'app', element: <GeneralApp /> },
         { path: 'welcome', element: <Welcome /> },
         { path: 'personal', element: <Personal /> },
-        { path: "history", element: <History /> },
+        { path: "history/:id", element: <History /> },
         // { path: "chats", element: <Chats /> },
         // { path: "contact", element: <Contact /> },
         // { path: "profile", element: <Profile /> },
