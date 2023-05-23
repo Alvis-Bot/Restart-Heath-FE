@@ -114,7 +114,7 @@ export const Personal = () => {
                     spacing={0.2}
                     justifyContent={`flex-start`}
                   >
-                    <Typography variant={`h1`} fontWeight={`inherit`}>
+                    <Typography variant={`h2`} fontWeight={`inherit`}>
                       {data ? data?.weight : 0}
                     </Typography>
                     <Typography variant={`h6`} pb={0.5} fontWeight={`inherit`}>
@@ -150,7 +150,7 @@ export const Personal = () => {
                     spacing={0.2}
                     justifyContent={`flex-start`}
                   >
-                    <Typography variant={`h1`} fontWeight={`inherit`}>
+                    <Typography variant={`h2`} fontWeight={`inherit`}>
                       {data ? data?.height : 0}
                     </Typography>
                     <Typography variant={`h6`} pb={0.5} fontWeight={`inherit`}>
