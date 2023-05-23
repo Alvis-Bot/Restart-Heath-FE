@@ -52,7 +52,9 @@ export const GenderInput: FC<GenderInputProps> = ({ handleChange, gender }) => {
             border: gender == Gender.MALE ? 'none' : '2px solid #eeeeee'
           }}
         >
-          <img src={male} width={`23px`} height={`70px`} alt='' />
+          <img src={male}  style={{
+            objectFit: 'cover'
+          }} alt='' />
           {gender == Gender.MALE && <Check />}
         </GenderItem>
         <Typography variant={`caption`}>Male</Typography>
@@ -72,7 +74,9 @@ export const GenderInput: FC<GenderInputProps> = ({ handleChange, gender }) => {
             border: gender == Gender.FEMALE ? 'none' : '2px solid #eeeeee'
           }}
         >
-          <img src={feMale} width={`30px`} height={`70px`} alt='' />
+          <img src={feMale} alt='' style={{
+            objectFit: 'cover'
+          }} />
           {gender === Gender.FEMALE && <Check />}
         </GenderItem>
         <Typography variant={`caption`}>Female</Typography>
