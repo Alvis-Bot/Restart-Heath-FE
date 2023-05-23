@@ -47,10 +47,12 @@ const GenderOption: FC<GenderInputProps> = ({ onClick, check, gender }) => {
           border: check ? 'none' : '2px solid #eeeeee'
         }}
       >
-        <img src={gender === GenderEnum.MALE ? male : feMale} width={`33px`} height={`70px`} alt='' />
+        <img src={gender === GenderEnum.MALE ? male : feMale} width={`33px`} height={`70px`} style={{
+          objectFit: 'contain'
+        }} alt='' />
         {check && <Check />}
       </GenderItem>
-      <Typography variant={`subtitle2`}>{gender === GenderEnum.MALE ? 'Male' : 'Female'}</Typography>
+      <Typography variant={`subtitle2`}>{gender === GenderEnum.MALE ? 'Nam' : 'Nữ'}</Typography>
     </Stack>
   )
 }
